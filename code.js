@@ -15,6 +15,25 @@ function permutationSort(a)
 
     //
 
+
+
+    //check for already sorted list
+    if(a.length == 0 || a.length == 1)
+    {
+        return 0;
+    }
+    for(var i = 1; i < a.length; i++)
+    {
+        if(a[i] < a[i-1])
+        {
+            break;
+        }
+    }
+
+
+    //
+
+    
     originalList = a.slice();
     var numIterations = 0;
     
