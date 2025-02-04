@@ -4,7 +4,9 @@
 //
 //
 
-
+// this is broken junk code in its current state
+// either stack overflows or fails with simple arrays
+// work in progress ha
 
 function permutationSort(a)
 {
