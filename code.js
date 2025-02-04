@@ -24,9 +24,9 @@ function permutationSort(a)
         numIterations++; 
     }
     
-    for(let i = 1; i < bruteForceList.length; i++) 
+    for(let i = 0; i < listLen; i++) 
     {
-        if(bruteForceList[i] < bruteForceList[i-1]) 
+        if(bruteForceList[i] !== originalList[i]) 
         {
             numIterations = 0;
             bruteForceList = []; //reset this so it can be randomized again...maybe not necessary?
@@ -37,5 +37,5 @@ function permutationSort(a)
 
     //
     
-    return numPerms; // number of permutation attempts
+    return numPerms; //number of permutation attempts
 }
