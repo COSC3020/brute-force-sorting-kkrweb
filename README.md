@@ -20,3 +20,13 @@ randomly without memory instead of systematically trying them?
 
 Describe your reasoning and the conclusion you've come to. Your reasoning is the
 most important part. Add your answer to this markdown file.
+
+//
+
+//
+
+2/4/2025
+
+Name: Kane Kriz
+
+Plagiarism Acknowledgement: I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
