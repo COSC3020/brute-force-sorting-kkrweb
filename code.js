@@ -20,6 +20,10 @@ function permutationSort(a)
 
 
     //check for already sorted list
+    //...added based on error logs from [0,1] not working but it also might just be that the code is bad enough that the first
+    // randomly generated or intentionally provided "a" list from the test code already breaks.
+    //
+    
     if(a.length == 0 || a.length == 1)
     {
         return 0;
