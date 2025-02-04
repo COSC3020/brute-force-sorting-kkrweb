@@ -49,7 +49,7 @@ function permutationSort(a)
         numIterations++; 
     }
     
-    for(let i = 1; i < bruteForceList.length; i++) 
+    for(var i = 1; i < bruteForceList.length; i++) 
     {
         if(bruteForceList[i] < bruteForceList[i-1]) 
         {
@@ -58,9 +58,9 @@ function permutationSort(a)
     }
 
     
-    for (let i = 0; i<listLen; i++) 
+    for (var i = 0; i<listLen; i++) 
     {
-        a[i] = originalList[bruteForceList[i]];
+        a[i] = originalList[bruteForceList[i]]; //this is awful to look at
     }
 
     //
