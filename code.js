@@ -8,7 +8,7 @@
 
 function permutationSort(a)
 {
-    var numPerms = 0;
+    var numPerms = 1; //breaks if 0? or irrelevant?
     var bruteForceList = [];
     var originalList = [];
     var listLen = a.length;
@@ -24,15 +24,18 @@ function permutationSort(a)
         numIterations++; 
     }
     
-    for(let i = 0; i < listLen; i++) 
+    for(let i = 1; i < bruteForceList.length; i++) 
     {
-        if(bruteForceList[i] !== originalList[i]) 
+        if(bruteForceList[i] < bruteForceList[i-1]) 
         {
-            numIterations = 0;
-            bruteForceList = []; //reset this so it can be randomized again...maybe not necessary?
-            numPerms++;
-            return permutationSort(a);
+            return numPerms + permutationSort(a);
         }
+    }
+
+    
+    for (let i = 0; i<listLen; i++) 
+    {
+        a[i] = originalList[bruteForceList[i]];
     }
 
     //
