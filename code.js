@@ -10,62 +10,52 @@
 
 function permutationSort(a)
 {
-    var numPerms = 1; //breaks if 0? or irrelevant?
+    var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0
     var bruteForceList = [];
     var originalList = [];
     var listLen = a.length;
 
-    //
-    
-    //check for already sorted list
-    //...added based on error logs from [0,1] not working but it also might just be that the code is bad enough that the first
-    // randomly generated or intentionally provided "a" list from the test code already breaks.
-    
-    //
-    
+    // Check for already sorted list
     if(a.length == 0 || a.length == 1)
     {
         return 0; //0 iterations for either of these examples
     }
-    for(var i = 1; i < a.length; i++)
+
+    for(var i = 0; i < a.length - 1; i++) 
     {
-        if(a[i] < a[i-1])
+        if(a[i] > a[i+1])
         {
-            break; 
+            break;
         }
-        else //added this else as when it was just the "if" it wasn't accomplishing anything?
+        if (i == a.length - 2)
         {
             return 0;
         }
     }
 
-    //
-    
     originalList = a.slice(); //copy original list if I am understanding slice() correctly
-    var numIterations = 0;
     
+    var numIterations = 0; //num of permutation attempts as specified within the directions
+
     while(numIterations < listLen) //shouldve just used a for. Guess i'll roll with this
     {
-        bruteForceList.push(Math.floor(Math.random() * listLen)); //this might just be completely useless
-        numIterations++; 
+        var randomNumToAdd = Math.floor(Math.random() * listLen)
+        bruteForceList.push(randomNumToAdd);
+        numIterations++;
     }
-    
-    for(var i = 1; i < bruteForceList.length; i++) 
+
+    for(var i = 0; i < bruteForceList.length - 1; i++) // Start at 0
     {
-        if(bruteForceList[i] < bruteForceList[i-1]) 
+        if(bruteForceList[i] > bruteForceList[i+1]) // Adjust comparison
         {
             return numPerms + permutationSort(a); //"numPerms +" necessary?
         }
     }
 
-    
-    for (var i = 0; i<listLen; i++) 
+    for(var i = 0; i < listLen; i++)
     {
         //this is awful to look at. Probably not even right
-       // a[i] = originalList[bruteForceList[i]]; 
+        a[i] = originalList[bruteForceList[i]];
     }
 
-    //
-    
-    return numPerms; //number of permutation attempts
 }
