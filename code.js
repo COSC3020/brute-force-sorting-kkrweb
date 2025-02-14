@@ -4,9 +4,11 @@
 //
 //
 
+
 // this is broken junk code in its current state
 // either stack overflows or fails with simple arrays
 // work in progress ha
+
 
 function permutationSort(a)
 {
@@ -27,7 +29,7 @@ function permutationSort(a)
         {
             break;
         }
-        if (i == a.length - 2)
+        if(i == a.length - 2)
         {
             return 0;
         }
@@ -35,8 +37,9 @@ function permutationSort(a)
 
     originalList = a.slice(); //copy original list if I am understanding slice() correctly
     
-    var numIterations = 0; //num of permutation attempts as specified within the directions
-
+    var numIterations = 0; //num of permutation attempts as specified within the directions. Glorified for loop with this heading below? Yeah
+    //This probably could have been not used in favor of using numPerms again somehow
+    
     while(numIterations < listLen) //shouldve just used a for. Would've made tracking through this easier. Guess i'll roll with this
     {
         var randomIndexGenerated = Math.floor(Math.random() * listLen);
@@ -47,7 +50,7 @@ function permutationSort(a)
         
         for(var j = 0; j < bruteForceList.length; j++) 
         {
-            if (bruteForceList[j] == originalList[randomIndexGenerated]) 
+            if(bruteForceList[j] == originalList[randomIndexGenerated]) 
             {
                 duplicateBool = true;
                 break;
