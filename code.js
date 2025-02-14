@@ -15,7 +15,7 @@ function permutationSort(a)
     var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0. If it was due to an error or feeling I have no idea
     var bruteForceList = [];
     var originalList = [];
-    var checkedIndices = []; // List to keep track of checked first position indices
+    var checkedIndices = []; //added list keeping track of checked first position indices...working to avoid duplicate checks when possible
     var listLen = a.length;
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
