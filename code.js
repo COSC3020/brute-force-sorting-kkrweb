@@ -9,7 +9,6 @@
 // either stack overflows or fails with simple arrays
 // work in progress ha
 
-
 function permutationSort(a)
 {
     //idea is to create an array via checkedIndices to help eliminate duplicate sorting
