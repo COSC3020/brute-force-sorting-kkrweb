@@ -59,10 +59,9 @@ function permutationSort(a)
                 break;
             }
         }
-        if((!duplicateBool) && (originalList.length > 0)) //added check if originalList is not empty, may be functionally useless / redundant
+        if(!duplicateBool && originalList.length > 0) //checking if originalList is not empty..may be functionally useless / redundant
         {
-            bruteForceList.push(originalList.shift()); //using shift for ascending order elements
-            //...could be done descending as well, either ensuring that duplicate entries are not checked over and over again by chance
+            bruteForceList.push(originalList.shift()); 
             numIterations++;
         }
     }
@@ -71,7 +70,7 @@ function permutationSort(a)
     {
         if(bruteForceList[i] > bruteForceList[i+1])
         {
-            return numPerms + permutationSort(a); //"numPerms +" necessary?
+            return numPerms + permutationSort(bruteForceList); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
         }
     }
 
