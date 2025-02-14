@@ -12,10 +12,10 @@
 
 function permutationSort(a)
 {
-    var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0. If it was due to an error or feeling I have no idea
+    var numPerms = 0; //set this back to 0...seems to logically be the right choice
     var bruteForceList = [];
     var originalList = [];
-    var checkedIndices = []; 
+    var checkedIndices = []; //list keeping track of checked first position indices
     var listLen = a.length;
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
@@ -51,7 +51,8 @@ function permutationSort(a)
 
         if(!checkedIndices.includes(currentIndex)) 
         {
-            var tempOriginalList = originalList.slice(); //gross, can be cleaned up. copy of originalList for permutation checking
+            var tempOriginalList = originalList.slice(); 
+            // gross temporary copy of originalList for permutation checking... this can be made cleaner or removed somehow.
 
             while(tempOriginalList.length > 0)
             {
@@ -74,11 +75,20 @@ function permutationSort(a)
                 {
                     if(bruteForceList[i] > bruteForceList[i+1])
                     {
-                        return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+                        bruteForceList = [];
+                        originalList = a.slice();
+                        numPerms++;
+                        duplicateBool = false;
+                        break;
                     }
                 }
+
+                if(!duplicateBool)
+                {
+                    break;
+                }
             }
-            checkedIndices.push(currentIndex); //index added to index pos0 checked list only after all permutations are checked
+            checkedIndices.push(currentIndex); //add index to checked list only after all permutations are checked
         }
         currentIndex++;
         if(currentIndex >= listLen)
