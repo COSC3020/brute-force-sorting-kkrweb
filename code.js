@@ -1,6 +1,6 @@
 // Kane Kriz
 // UWYO COSC 3020
-// 4 Feb 2025
+// 14 Feb 2025
 //
 //
 
@@ -10,12 +10,12 @@
 
 function permutationSort(a)
 {
-    var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0
+    var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0. If it was due to an error or feeling I have no idea
     var bruteForceList = [];
     var originalList = [];
     var listLen = a.length;
 
-    // Check for already sorted list
+    //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
     if(a.length == 0 || a.length == 1)
     {
         return 0; //0 iterations for either of these examples
@@ -37,25 +37,42 @@ function permutationSort(a)
     
     var numIterations = 0; //num of permutation attempts as specified within the directions
 
-    while(numIterations < listLen) //shouldve just used a for. Guess i'll roll with this
+    while(numIterations < listLen) //shouldve just used a for. Would've made tracking through this easier. Guess i'll roll with this
     {
-        var randomNumToAdd = Math.floor(Math.random() * listLen)
-        bruteForceList.push(randomNumToAdd);
-        numIterations++;
+        var randomIndexGenerated = Math.floor(Math.random() * listLen);
+        
+        var duplicateBool = false; 
+        //bool for whether or not a duplicate entry for the permutation is generated...
+        //this is probably very cumbersome and inefficient, but if it works it works I suppose...
+        
+        for(var j = 0; j < bruteForceList.length; j++) 
+        {
+            if (bruteForceList[j] == originalList[randomIndexGenerated]) 
+            {
+                duplicateBool = true;
+                break;
+            }
+        }
+        if(!duplicateBool) 
+        {
+            bruteForceList.push(originalList[randomIndexGenerated]);
+            numIterations++;
+        }
     }
 
-    for(var i = 0; i < bruteForceList.length - 1; i++) // Start at 0
+    for(var i = 0; i < bruteForceList.length - 1; i++)
     {
-        if(bruteForceList[i] > bruteForceList[i+1]) // Adjust comparison
+        if(bruteForceList[i] > bruteForceList[i+1])
         {
             return numPerms + permutationSort(a); //"numPerms +" necessary?
         }
     }
 
     for(var i = 0; i < listLen; i++)
+        //is this for even necessary? Is altering the input array even necessary to complete this exercise?
+        //seems unnecessary. I'm going to add and remove it and see if anything changes with the test code running
     {
-        //this is awful to look at. Probably not even right
-        a[i] = originalList[bruteForceList[i]];
+        a[i] = bruteForceList[i]; //this is awful to look at. Probably not even right
     }
-
+    return numPerms; //returns number of permutations as specified within the problem
 }
