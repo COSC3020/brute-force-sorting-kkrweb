@@ -12,7 +12,7 @@
 
 function permutationSort(a)
 {
-    var numPerms = 0; //set this back to 0...seems to logically be the right choice
+    var numPerms = 0; 
     var bruteForceList = [];
     var originalList = [];
     var checkedIndices = []; //list keeping track of checked first position indices
@@ -51,8 +51,9 @@ function permutationSort(a)
 
         if(!checkedIndices.includes(currentIndex)) 
         {
-            var tempOriginalList = originalList.slice(); 
-            // gross temporary copy of originalList for permutation checking... this can be made cleaner or removed somehow.
+            var tempOriginalList = originalList.slice(); //gross
+
+            bruteForceList = [tempOriginalList[currentIndex], ...tempOriginalList.slice(0, currentIndex), ...tempOriginalList.slice(currentIndex + 1)];
 
             while(tempOriginalList.length > 0)
             {
@@ -75,20 +76,16 @@ function permutationSort(a)
                 {
                     if(bruteForceList[i] > bruteForceList[i+1])
                     {
-                        bruteForceList = [];
-                        originalList = a.slice();
-                        numPerms++;
-                        duplicateBool = false;
-                        break;
+                        checkedIndices.push(currentIndex); //adding index to checked list only after all permutations are checked
+                        currentIndex++;
+                        if(currentIndex >= listLen)
+                        {
+                            currentIndex = 0;
+                        }
+                        return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
                     }
                 }
-
-                if(!duplicateBool)
-                {
-                    break;
-                }
             }
-            checkedIndices.push(currentIndex); //add index to checked list only after all permutations are checked
         }
         currentIndex++;
         if(currentIndex >= listLen)
