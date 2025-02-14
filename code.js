@@ -9,6 +9,17 @@
 // either stack overflows or fails with simple arrays
 // work in progress ha
 
+
+// This is Ship of Theseus code...
+// I have nuked it enough times that I don't know if it even deserves to live in the same file anymore
+
+
+//
+// Seems like recursion on this is just asking for a stack overflow
+//options are, a stack overflow via recursion with pretty reasonable to follow logic
+//or iterative, extremely complicated logic.
+//
+
 function permutationSort(a)
 {
     //idea is to create an array via checkedIndices to help eliminate duplicate sorting
