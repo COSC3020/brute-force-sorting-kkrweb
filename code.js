@@ -15,6 +15,7 @@ function permutationSort(a)
     var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0. If it was due to an error or feeling I have no idea
     var bruteForceList = [];
     var originalList = [];
+    var checkedIndices = []; // List to keep track of checked first position indices
     var listLen = a.length;
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
@@ -40,37 +41,53 @@ function permutationSort(a)
     var numIterations = 0; //num of permutation attempts as specified within the directions. Glorified for loop with this heading below? Yeah
     //This probably could have been not used in favor of using numPerms again somehow
 
-    while(numIterations < listLen) //shouldve just used a for. Would've made tracking through this easier. Guess i'll roll with this
-    {
-        /*
-        //VERY STUPID. JUST WAS A RANDOM SORT AND TOOK FOREVER. 
-        //var randomIndexGenerated = Math.floor(Math.random() * listLen);
-        */
+    var currentIndex = 0;
 
+    while(checkedIndices.length < listLen) // Changed the condition to loop until all indices are checked
+    {
         var duplicateBool = false; 
         //bool for whether or not a duplicate entry for the permutation is generated...
         //this is probably very cumbersome and inefficient, but if it works it works I suppose...
+        //...turns out it was and I had to nuke some later functionality of the code
 
-        for(var j = 0; j < bruteForceList.length; j++) 
+        if(!checkedIndices.includes(currentIndex)) 
         {
-            if(bruteForceList[j] == originalList[j]) 
+            for(var j = 0; j < bruteForceList.length; j++) 
             {
-                duplicateBool = true;
-                break;
+                if(bruteForceList[j] == originalList[j]) 
+                {
+                    duplicateBool = true;
+                    break;
+                }
+            }
+            
+            if(!duplicateBool && originalList.length > 0) //checking if originalList is not empty..may be functionally useless / redundant
+            {
+                bruteForceList.push(originalList.shift()); 
+                numIterations++;
+            }
+
+            for(var i = 0; i < bruteForceList.length - 1; i++)
+            {
+                if(bruteForceList[i] > bruteForceList[i+1])
+                {
+                    checkedIndices.push(bruteForceList[0]); //adding first position index to checked list, helping to avoid reduntant checks? Systmatic?
+                    currentIndex++;
+                    
+                    if(currentIndex >= listLen) 
+                    {
+                        currentIndex = 0;
+                    }
+                    
+                    return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+                }
             }
         }
-        if(!duplicateBool && originalList.length > 0) //checking if originalList is not empty..may be functionally useless / redundant
+        currentIndex++;
+        
+        if(currentIndex >= listLen)
         {
-            bruteForceList.push(originalList.shift()); 
-            numIterations++;
-        }
-    }
-
-    for(var i = 0; i < bruteForceList.length - 1; i++)
-    {
-        if(bruteForceList[i] > bruteForceList[i+1])
-        {
-            return numPerms + permutationSort(bruteForceList); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+            currentIndex = 0;
         }
     }
 
