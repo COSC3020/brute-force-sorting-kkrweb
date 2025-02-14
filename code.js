@@ -12,10 +12,14 @@
 
 function permutationSort(a)
 {
+    //idea is to create an array via checkedIndices to help eliminate duplicate sorting
+    //i.e. of a 3 element array, it would try 0 1 2 then 0 2 1, then recording that all permutations with original index 0 still in slot 0 are not sorted.
+    //then it would check 1 0 2 and 1 2 0, still seaching for a sorted array via swapping around the indices
+    
     var numPerms = 0; 
     var bruteForceList = [];
     var originalList = [];
-    var checkedIndices = []; //list keeping track of checked first position indices
+    var checkedIndices = []; //list to keep track of checked first position indices
     var listLen = a.length;
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
@@ -53,8 +57,6 @@ function permutationSort(a)
         {
             var tempOriginalList = originalList.slice(); //gross
 
-            bruteForceList = [tempOriginalList[currentIndex], ...tempOriginalList.slice(0, currentIndex), ...tempOriginalList.slice(currentIndex + 1)];
-
             while(tempOriginalList.length > 0)
             {
                 for(var j = 0; j < bruteForceList.length; j++) 
@@ -76,16 +78,20 @@ function permutationSort(a)
                 {
                     if(bruteForceList[i] > bruteForceList[i+1])
                     {
-                        checkedIndices.push(currentIndex); //adding index to checked list only after all permutations are checked
-                        currentIndex++;
-                        if(currentIndex >= listLen)
-                        {
-                            currentIndex = 0;
-                        }
-                        return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+                        bruteForceList = [];
+                        originalList = a.slice();
+                        numPerms++;
+                        duplicateBool = false;
+                        break;
                     }
                 }
+
+                if(!duplicateBool)
+                {
+                    break;
+                }
             }
+            checkedIndices.push(currentIndex); //adding index to checked list only after all permutations are checked
         }
         currentIndex++;
         if(currentIndex >= listLen)
