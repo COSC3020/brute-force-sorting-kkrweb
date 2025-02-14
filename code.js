@@ -36,29 +36,33 @@ function permutationSort(a)
     }
 
     originalList = a.slice(); //copy original list if I am understanding slice() correctly
-    
+
     var numIterations = 0; //num of permutation attempts as specified within the directions. Glorified for loop with this heading below? Yeah
     //This probably could have been not used in favor of using numPerms again somehow
-    
+
     while(numIterations < listLen) //shouldve just used a for. Would've made tracking through this easier. Guess i'll roll with this
     {
-        var randomIndexGenerated = Math.floor(Math.random() * listLen);
-        
+        /*
+        //VERY STUPID. JUST WAS A RANDOM SORT AND TOOK FOREVER. 
+        //var randomIndexGenerated = Math.floor(Math.random() * listLen);
+        */
+
         var duplicateBool = false; 
         //bool for whether or not a duplicate entry for the permutation is generated...
         //this is probably very cumbersome and inefficient, but if it works it works I suppose...
-        
+
         for(var j = 0; j < bruteForceList.length; j++) 
         {
-            if(bruteForceList[j] == originalList[randomIndexGenerated]) 
+            if(bruteForceList[j] == originalList[j]) 
             {
                 duplicateBool = true;
                 break;
             }
         }
-        if(!duplicateBool) 
+        if((!duplicateBool) && (originalList.length > 0)) //added check if originalList is not empty, may be functionally useless / redundant
         {
-            bruteForceList.push(originalList[randomIndexGenerated]);
+            bruteForceList.push(originalList.shift()); //using shift for ascending order elements
+            //...could be done descending as well, either ensuring that duplicate entries are not checked over and over again by chance
             numIterations++;
         }
     }
