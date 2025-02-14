@@ -15,7 +15,7 @@ function permutationSort(a)
     var numPerms = 1; //breaks if 0? or irrelevant? Try either. I forget why I changed this to 1 from 0. If it was due to an error or feeling I have no idea
     var bruteForceList = [];
     var originalList = [];
-    var checkedIndices = []; //added list keeping track of checked first position indices...working to avoid duplicate checks when possible
+    var checkedIndices = []; 
     var listLen = a.length;
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
@@ -43,48 +43,44 @@ function permutationSort(a)
 
     var currentIndex = 0;
 
-    while(checkedIndices.length < listLen) // Changed the condition to loop until all indices are checked
+    while(checkedIndices.length < listLen) //loop until all indices are checked
     {
         var duplicateBool = false; 
         //bool for whether or not a duplicate entry for the permutation is generated...
         //this is probably very cumbersome and inefficient, but if it works it works I suppose...
-        //...turns out it was and I had to nuke some later functionality of the code
 
         if(!checkedIndices.includes(currentIndex)) 
         {
-            for(var j = 0; j < bruteForceList.length; j++) 
-            {
-                if(bruteForceList[j] == originalList[j]) 
-                {
-                    duplicateBool = true;
-                    break;
-                }
-            }
-            
-            if(!duplicateBool && originalList.length > 0) //checking if originalList is not empty..may be functionally useless / redundant
-            {
-                bruteForceList.push(originalList.shift()); 
-                numIterations++;
-            }
+            var tempOriginalList = originalList.slice(); //gross, can be cleaned up. copy of originalList for permutation checking
 
-            for(var i = 0; i < bruteForceList.length - 1; i++)
+            while(tempOriginalList.length > 0)
             {
-                if(bruteForceList[i] > bruteForceList[i+1])
+                for(var j = 0; j < bruteForceList.length; j++) 
                 {
-                    checkedIndices.push(bruteForceList[0]); //adding first position index to checked list, helping to avoid reduntant checks? Systmatic?
-                    currentIndex++;
-                    
-                    if(currentIndex >= listLen) 
+                    if(bruteForceList[j] == tempOriginalList[j]) 
                     {
-                        currentIndex = 0;
+                        duplicateBool = true;
+                        break;
                     }
-                    
-                    return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+                }
+
+                if(!duplicateBool && tempOriginalList.length > 0) 
+                {
+                    bruteForceList.push(tempOriginalList.shift()); 
+                    numIterations++;
+                }
+
+                for(var i = 0; i < bruteForceList.length - 1; i++)
+                {
+                    if(bruteForceList[i] > bruteForceList[i+1])
+                    {
+                        return numPerms + permutationSort(a); //"numPerms +" necessary? Edited this line to fix errors with stack overflow
+                    }
                 }
             }
+            checkedIndices.push(currentIndex); //index added to index pos0 checked list only after all permutations are checked
         }
         currentIndex++;
-        
         if(currentIndex >= listLen)
         {
             currentIndex = 0;
@@ -92,8 +88,8 @@ function permutationSort(a)
     }
 
     for(var i = 0; i < listLen; i++)
-        //is this for even necessary? Is altering the input array even necessary to complete this exercise?
-        //seems unnecessary. I'm going to add and remove it and see if anything changes with the test code running
+    //is this for even necessary? Is altering the input array even necessary to complete this exercise?
+    //seems unnecessary. I'm going to add and remove it and see if anything changes with the test code running
     {
         a[i] = bruteForceList[i]; //this is awful to look at. Probably not even right
     }
