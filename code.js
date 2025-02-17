@@ -13,10 +13,13 @@ function permutationSort(a)
 {
 var permCount = 0;
 var arrLen = a.length;
-var sortedPerm = false; //will be made true upon a sorted permutation being found 
+var sortedPerm = false; //will be made true upon a sorted permutation being found. 
+    
 var temp;
 var startPos = 0;
 var endPos; 
+
+var combinedNum = 0; //bad.
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
     if(arrLen == 0 || arrLen == 1)
@@ -24,64 +27,9 @@ var endPos;
         return 0; //0 iterations for either of these examples
     }
 
-    while(!sortedPerm)
-    {
-        permCount++;
-        sortedPerm = true; //backwards logic. fix this
-        
-        for(var i = 0; i < arrLen - 1; i++)
-        {
-            if(a[i] > a[i + 1])
-            {
-                sortedPerm = false;
-                break;
-            }
-        }
-
-        if(sortedPerm)
-        {
-            break;
-        } 
-            
-        else
-        {
-            //Generate the next permutation in ascending order
-            var i = arrLen - 2;
-            while(i >= 0 && a[i] >= a[i + 1]) 
-            {
-                i--;
-            }
-            if(i < 0) 
-            {
-                break;
-            }
-
-            var endIdx = arrLen - 1;
-
-            while(a[endIdx] <= a[i]) 
-            {
-                endIdx--;
-            }
-
-            temp = a[i];
-            a[i] = a[endIdx];
-            a[endIdx] = temp;
-
-            startPos = i + 1;
-            endPos = arrLen - 1;
-            
-            while(startPos < endPos)
-            {
-                temp = a[startPos];
-                a[startPos] = a[endPos];
-                a[endPos] = temp;
-                startPos++;
-                endPos--;
-            }
-        }
-    }
-
-    return permCount;
+    
+    //tons of nested fors here? Trying to make this logic systematically do it but it just keeps turning into either an infinitely running thing that doesn't do anything systematic
+    //hmmmmm
 }
 
 
