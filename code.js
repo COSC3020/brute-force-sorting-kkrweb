@@ -16,12 +16,12 @@ var numPerms = 0;
 var permCount = 0;
 var arrLen = a.length;
 var sortedPerm = false; //will be made true upon a sorted permutation being found. 
-    
-var temp;
+
+var temp; //for later swaps
+
+//potentially obselete
 var startPos = 0;
 var endPos; 
-
-var combinedNum = 0; //bad.
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
     if(arrLen == 0 || arrLen == 1)
