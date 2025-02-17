@@ -28,7 +28,7 @@ var combinedNum = 0; //bad.
         return 0; //0 iterations for either of these examples
     }
 
-    function ascendingSystematicIndex
+    function ascendingSystematicIndex //think for index [a b c], run through indices [0 1 2] then [0 2 1], then [1 0 2], then [1 2 0]. Ascending order, running through all combinations of the first, earliest index left, then moving down the list accordingly.
     {
         //
     }
