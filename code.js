@@ -11,6 +11,7 @@
 
 function permutationSort(a)
 {
+var numPerms = 0;
 var permCount = 0;
 var arrLen = a.length;
 var sortedPerm = false; //will be made true upon a sorted permutation being found. 
@@ -27,9 +28,11 @@ var combinedNum = 0; //bad.
         return 0; //0 iterations for either of these examples
     }
 
-    
-    //tons of nested fors here? Trying to make this logic systematically do it but it just keeps turning into either an infinitely running thing that doesn't do anything systematic
-    //hmmmmm
+    function ascendingSystematicIndex
+    {
+        //
+    }
+    return numPerms;
 }
 
 
