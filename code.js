@@ -1,9 +1,97 @@
 // Kane Kriz
 // UWYO COSC 3020
-// 14 Feb 2025
+// 16 Feb 2025
 //
 //
 
+
+
+
+
+
+function permutationSort(a)
+{
+var permCount = 0;
+var arrLen = a.length;
+var sortedPerm = false; //will be made true upon a sorted permutation being found 
+var temp;
+var startPos = 0;
+var endPos; 
+
+    //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
+    if(arrLen == 0 || arrLen == 1)
+    {
+        return 0; //0 iterations for either of these examples
+    }
+
+    while(!sortedPerm)
+    {
+        permCount++;
+        sortedPerm = true; //backwards logic. fix this
+        
+        for(var i = 0; i < arrLen - 1; i++)
+        {
+            if(a[i] > a[i + 1])
+            {
+                sortedPerm = false;
+                break;
+            }
+        }
+
+        if(sortedPerm)
+        {
+            break;
+        } 
+            
+        else
+        {
+            //Generate the next permutation in ascending order
+            var i = arrLen - 2;
+            while(i >= 0 && a[i] >= a[i + 1]) 
+            {
+                i--;
+            }
+            if(i < 0) 
+            {
+                break;
+            }
+
+            var endIdx = arrLen - 1;
+
+            while(a[endIdx] <= a[i]) 
+            {
+                endIdx--;
+            }
+
+            temp = a[i];
+            a[i] = a[endIdx];
+            a[endIdx] = temp;
+
+            startPos = i + 1;
+            endPos = arrLen - 1;
+            
+            while(startPos < endPos)
+            {
+                temp = a[startPos];
+                a[startPos] = a[endPos];
+                a[endPos] = temp;
+                startPos++;
+                endPos--;
+            }
+        }
+    }
+
+    return permCount;
+}
+
+
+
+
+
+//___________________________________________________________________________________________________________________________________________________
+/*
+STARTING THIS WHOLE EXERCISE OVER
+My code is too bad, will remain below in this block.
 
 // this is broken junk code in its current state
 // either stack overflows or fails with simple arrays
@@ -118,3 +206,5 @@ function permutationSort(a)
     }
     return numPerms; //returns number of permutations as specified within the problem
 }
+
+*/
