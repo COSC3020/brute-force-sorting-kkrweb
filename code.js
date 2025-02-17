@@ -11,6 +11,7 @@
 
 function permutationSort(a)
 {
+    //some of these variables will prove to be unnecessary or obselete
 var numPerms = 0;
 var permCount = 0;
 var arrLen = a.length;
@@ -30,9 +31,19 @@ var combinedNum = 0; //bad.
 
     function ascendingSystematicIndex //think for index [a b c], run through indices [0 1 2] then [0 2 1], then [1 0 2], then [1 2 0]. Ascending order, running through all combinations of the first, earliest index left, then moving down the list accordingly.
     {
-        //
+        var numPreviousIndices = 0;
+        while(!sortedPerm)
+            {
+                //continue trying for sorted permutations, in ascending order so no duplicates are tried, no random generation becasue that takes forever and ever and is not systematic.
+                //
+                //logical steps:
+                // -first, test if the default start is sorted... [0, 1, 2, 3...] by indicies
+                // -then, once it is most likely seen to not be sorted, try the next "highest" permutation. Again, think [0 1 2 3] into [0 1 3 2] into [0 2 1 3], then [0 2 3 1] then [0 3 1 2] then [0 3 2 1].
+                // -somehow make the logic within a function or a loop recognize that these logically ascending indices are truly "ascending" and such increasing traversal of them would even be possible to implement...especially with the lack of complicated things I know in JS.
+                // -it's like seeing the array as already having been "sorted" with its existing indices in order to permuation sort it...
+            }
     }
-    return numPerms;
+    return numPerms; //returns number of perms as specified within the directions
 }
 
 
