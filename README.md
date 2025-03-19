@@ -28,10 +28,14 @@ RESPONSE: Incomplete
 //
 
 Start Date: 4 Feb 2025
-Feedback Request 1: 14 Feb 2025
+Feedback Request 1: 19 March 2025
 
 Name: Kane Kriz
 
 Plagiarism Acknowledgement: I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
 
 Citations:
+
+GeeksforGeeks. “Next Permutation.” GeeksforGeeks, 9 Sept. 2022, www.geeksforgeeks.org/next-permutation/, https://doi.org/1082330/Nextpermutation-660. Accessed 19 Mar. 2025.
+
+Lee, Iram. “Efficient Permutations in Lexicographic Order - STEM Hash.” Stemhash.com, 2020, stemhash.com/efficient-permutations-in-lexicographic-order/. Accessed 19 Mar. 2025.
