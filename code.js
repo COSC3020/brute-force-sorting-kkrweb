@@ -1,6 +1,6 @@
 // Kane Kriz
 // UWYO COSC 3020
-// 16 Feb 2025
+// 19 March 2025
 //
 //
 
@@ -9,43 +9,94 @@
 
 
 
-function permutationSort(a)
+function permutationSort(initialArray)
 {
     //some of these variables will prove to be unnecessary or obselete
-var numPerms = 0;
-var permCount = 0;
-var arrLen = a.length;
-var sortedPerm = false; //will be made true upon a sorted permutation being found. 
+    var numPerms = 0;
+    var permCount = 0;
+    var arrLen = initialArray.length;
+    var sortedPerm = false; //will be made true upon a sorted permutation being found. At least in theory?
 
-var temp; //for later swaps
+    var temp; //for later swaps
 
-//potentially obselete
-var startPos = 0;
-var endPos; 
+    //potentially obselete
+    var startPos = 0;
+    var endPos; 
 
     //checking for an already sorted list, guaranteed with array entries of size 0 or 1.
-    if(arrLen == 0 || arrLen == 1)
+    if (arrLen == 0 || arrLen == 1)
     {
         return 0; //0 iterations for either of these examples
     }
 
-    function ascendingSystematicIndex //think for index [a b c], run through indices [0 1 2] then [0 2 1], then [1 0 2], then [1 2 0]. Ascending order, running through all combinations of the first, earliest index left, then moving down the list accordingly.
+    //checking if array is sorted
+    function sortCheck(createdArray)
     {
-        var numPreviousIndices = 0;
-        while(!sortedPerm)
+        for (var i = 1; i < createdArray.length; i++)
+        {
+            if (createdArray[i - 1] > createdArray[i])
             {
-                //continue trying for sorted permutations, in ascending order so no duplicates are tried, no random generation becasue that takes forever and ever and is not systematic.
-                //
-                //logical steps:
-                // -first, test if the default start is sorted... [0, 1, 2, 3...] by indicies
-                // -then, once it is most likely seen to not be sorted, try the next "highest" permutation. Again, think [0 1 2 3] into [0 1 3 2] into [0 2 1 3], then [0 2 3 1] then [0 3 1 2] then [0 3 2 1].
-                // -somehow make the logic within a function or a loop recognize that these logically ascending indices are truly "ascending" and such increasing traversal of them would even be possible to implement...especially with the lack of complicated things I know in JS.
-                // -it's like seeing the array as already having been "sorted" with its existing indices in order to permuation sort it...
+                return false;
             }
+        }
+        return true;
     }
+
+    //function to generate the next permutation systematticaly
+    function nextPermutation(createdArray)
+    {
+        var i = createdArray.length - 2;
+        while (i >= 0 && createdArray[i] >= createdArray[i + 1])
+        {
+            i--;
+        }
+
+        if(i >= 0)
+        {
+            var j = createdArray.length - 1;
+            while (createdArray[j] <= createdArray[i])
+            {
+                j--;
+            }
+            // Swap createdArray[i] and createdArray[j]
+            temp = createdArray[i];
+            createdArray[i] = createdArray[j];
+            createdArray[j] = temp;
+        }
+
+        //cite this
+        var left = i + 1;
+        var right = createdArray.length - 1;
+        while (left < right)
+        {
+            temp = createdArray[left];
+            createdArray[left] = createdArray[right];
+            createdArray[right] = temp;
+            left++;
+            right--;
+        }
+    }
+
+    //check starting array to see if it is already sorted before permutations
+    if (sortCheck(initialArray))
+    {
+        return 0; //already sorted, no permutations necessary
+    }
+
+    //generating permutations systematically until the sorted one is found and sortedPerm becomes true
+    while (!sortedPerm)
+    {
+        nextPermutation(initialArray);
+        numPerms++;
+        
+        if (sortCheck(initialArray))
+        {
+            sortedPerm = true;
+        }
+    }
+
     return numPerms; //returns number of perms as specified within the directions
 }
-
 
 
 
