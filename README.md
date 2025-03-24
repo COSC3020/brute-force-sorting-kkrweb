@@ -40,7 +40,7 @@ If the input is reverse-sorted, the algorithm must generate all n! permutations 
 This ensures that the algorithm performs the maximum number of checks, resulting in the worst-case complexity of **O(n!)**.
 
 A best case for my implemented algorithm would be when the input list is already sorted. 
-In this scenario, the algorithm would immediately recognize that the list is sorted (using the `sortCheck` function) and return 0 permutations.
+In this scenario, the algorithm would immediately recognize that the list is sorted (using the sortCheck function) and return 0 permutations.
 The time complexity in this case would be O(n), where n is the length of the list.
 This O(n) complexity occurs due to the single pass through the list to check if it is sorted.
 
@@ -59,7 +59,9 @@ This, as a result, would lead towards inefficiency and a higher constant factor 
 
 In contrast, the systematic approach ensures that each permutation is unique and only generated once, guaranteeing that the sorted permutation is found within n! attempts. 
 This makes the systematic approach far more predictable and efficient, with a worst-case complexity of O(n!).
-Most applications would as a result benefit from the guaranteed nature of the systematic sort when compared to the random sort without memory...unless such an application or user is feeling particularly lucky.
+Most applications would as a result benefit from the guaranteed nature of the systematic sort when compared to the random sort without memory...unless such an application or user is feeling particularly "lucky".
+Assuming a net benefit from random chance brute forcing without memory, relative to the systematic brute force sorting (as could be assumed), is not a good idea.
+In nearly all but the shortest list sizes, n! permutations is such a high number that finding the actual sorted permutation by random chance without memory may simply never occur, at least prior to the heat death of the universe.
 
 Random generation would introduce notable incosistencies in runtime. 
 The algorithm may get lucky and find the sorted permutation early, theoreticaly as early as the best case of O(n). 
@@ -72,13 +74,18 @@ This unpredictability and large potential for slowdown (due to the above duplica
 
 
 Start Date: 4 Feb 2025
-Feedback Request 1: 19 March 2025
+Last Edited: 24 March 2025
+Feedback Request 1: X
 
 Name: Kane Kriz
 
+//
+
 Plagiarism Acknowledgement: I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
 
+
 Citations:
+“Lexicographic Order.” Wolfram.com, Wolfram Research, Inc., 2025, mathworld.wolfram.com/LexicographicOrder.html. Accessed 24 Mar. 2025.
 
 GeeksforGeeks. “Next Permutation.” GeeksforGeeks, 9 Sept. 2022, www.geeksforgeeks.org/next-permutation/, https://doi.org/1082330/Nextpermutation-660. Accessed 19 Mar. 2025.
 
