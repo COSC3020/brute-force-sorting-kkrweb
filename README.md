@@ -53,17 +53,18 @@ This is the case as the checks for permutations occur in ascending order. (i.e. 
 This complexity would potentially change if I generated permutations randomly instead of systematically trying them as follows:  
 If permutations were generated randomly without somehow storing already attempted permutations, the worst-case complexity would no longer be O(n!), as was said above.
 Instead, it would be a worst case of being unbounded, as the algorithm could theoretically never generate the sorted permutation due to repeated attempts. 
+
 However, the average-case complexity would still be O(n!), as the expected number of attempts to find the sorted permutation is proportional to n!. 
 It is important to note this proportionality differs from the systematic approach, as the random method could (likely) waste time repeatedly generating the same permutations.
 This, as a result, would lead towards inefficiency and a higher constant factor in practice in most applications due to the nature of the algorithm.
 
-In contrast, the systematic approach ensures that each permutation is unique and only generated once, guaranteeing that the sorted permutation is found within n! attempts. 
-This makes the systematic approach far more predictable and efficient, with a worst-case complexity of O(n!).
+On the other hand, the original systematic approach ensures that each permutation is unique and only generated once, guaranteeing that the sorted permutation is found within n! attempts. 
+This makes the systematic approach far more predictable and efficient, with a worst-case complexity of O(n!), in contrast to the unbounded (no guarantee) nature of the non-memory random permutation generator.
 Most applications would as a result benefit from the guaranteed nature of the systematic sort when compared to the random sort without memory...unless such an application or user is feeling particularly "lucky".
 Assuming a net benefit from random chance brute forcing without memory, relative to the systematic brute force sorting (as could be assumed), is not a good idea.
 In nearly all but the shortest list sizes, n! permutations is such a high number that finding the actual sorted permutation by random chance without memory may simply never occur, at least prior to the heat death of the universe.
 
-Random generation would introduce notable incosistencies in runtime. 
+As was touched on above, random generation without memory would introduce notable incosistencies in runtime, in addition to no longer ensuring that the algorithm is even making progress towards eliminating all possible permutations (due to the lack of memory). 
 The algorithm may get lucky and find the sorted permutation early, theoreticaly as early as the best case of O(n). 
 On the other side of things, the algorithm may get unlucky and take notably longer than the eventual guaranteed progression of the systematic approach.
 This largely occurs due to potential of repeated generation of the same non-sorted permutations. 
@@ -75,7 +76,7 @@ This unpredictability and large potential for slowdown (due to the above duplica
 
 Start Date: 4 Feb 2025
 Last Edited: 24 March 2025
-Feedback Request 1: X
+Feedback Request 1: 24 March 2025
 
 Name: Kane Kriz
 
